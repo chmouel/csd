@@ -48,3 +48,11 @@ Backreferences work with both `\1` and `$1` syntax.
 ## License
 
 [Apache-2.0](./LICENSE.md)
+
+## Authors
+
+### Chmouel Boudjnah
+
+- Fediverse - <[@chmouel@chmouel.com](https://fosstodon.org/@chmouel)>
+- Twitter - <[@chmouel](https://twitter.com/chmouel)>
+- Blog  - <[https://blog.chmouel.com](https://blog.chmouel.com)>
