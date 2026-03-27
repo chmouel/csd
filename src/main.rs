@@ -63,9 +63,7 @@ fn run() -> Result<()> {
     // With 3 args, the first is always a file pattern for walking.
     let stdin_is_pipe = !std::io::stdin().is_terminal() && cli.patterns.len() == 2;
 
-    let (file_pattern_str, search_pattern, replacement_raw) = if stdin_is_pipe {
-        (None, cli.patterns[0].clone(), cli.patterns[1].clone())
-    } else if cli.patterns.len() == 2 {
+    let (file_pattern_str, search_pattern, replacement_raw) = if cli.patterns.len() == 2 {
         (None, cli.patterns[0].clone(), cli.patterns[1].clone())
     } else {
         (

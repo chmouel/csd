@@ -41,7 +41,7 @@ pub fn walk_files(file_pattern: Option<&Regex>, no_ignore: bool, include_git_dir
         {
             continue;
         }
-        if !entry.file_type().map_or(false, |ft| ft.is_file()) {
+        if !entry.file_type().is_some_and(|ft| ft.is_file()) {
             continue;
         }
         let path = entry.into_path();
