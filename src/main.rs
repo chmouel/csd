@@ -5,7 +5,7 @@ mod walk;
 use std::io::IsTerminal;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-use anyhow::{bail, Result};
+use anyhow::Result;
 use clap::Parser;
 use rayon::prelude::*;
 use regex::Regex;
@@ -53,12 +53,13 @@ fn convert_backrefs(replacement: &str) -> String {
 fn run() -> Result<()> {
     let cli = Cli::parse();
 
-    let stdin_is_pipe = !std::io::stdin().is_terminal();
+    // Only treat stdin as piped file list when:
+    // 1. stdin is not a terminal AND
+    // 2. exactly 2 positional args are given (search + replacement)
+    // With 3 args, the first is always a file pattern for walking.
+    let stdin_is_pipe = !std::io::stdin().is_terminal() && cli.patterns.len() == 2;
 
     let (file_pattern_str, search_pattern, replacement_raw) = if stdin_is_pipe {
-        if cli.patterns.len() != 2 {
-            bail!("With piped input, provide SEARCH and REPLACEMENT patterns.");
-        }
         (None, cli.patterns[0].clone(), cli.patterns[1].clone())
     } else if cli.patterns.len() == 2 {
         (None, cli.patterns[0].clone(), cli.patterns[1].clone())
