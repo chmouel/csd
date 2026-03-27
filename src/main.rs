@@ -39,6 +39,10 @@ struct Cli {
     #[arg(short = 'I', long = "no-ignore")]
     no_ignore: bool,
 
+    /// Include .git directory contents (also settable via CSD_INCLUDE_GIT_DIR=1)
+    #[arg(long = "include-git-dir", env = "CSD_INCLUDE_GIT_DIR")]
+    include_git_dir: bool,
+
     /// Show what would change without modifying files
     #[arg(long = "dry-run")]
     dry_run: bool,
@@ -86,7 +90,7 @@ fn run() -> Result<()> {
     let files = if stdin_is_pipe {
         walk::read_stdin_files()
     } else {
-        walk::walk_files(file_pattern.as_ref(), cli.no_ignore)
+        walk::walk_files(file_pattern.as_ref(), cli.no_ignore, cli.include_git_dir)
     };
 
     if files.is_empty() {

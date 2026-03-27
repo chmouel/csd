@@ -19,7 +19,7 @@ pub fn is_binary(path: &std::path::Path) -> bool {
 
 /// Walk the current directory for files matching an optional file pattern regex.
 /// Respects .gitignore and .ignore files unless `no_ignore` is set.
-pub fn walk_files(file_pattern: Option<&Regex>, no_ignore: bool) -> Vec<PathBuf> {
+pub fn walk_files(file_pattern: Option<&Regex>, no_ignore: bool, include_git_dir: bool) -> Vec<PathBuf> {
     let mut builder = WalkBuilder::new(".");
     builder
         .hidden(false) // don't skip hidden files by default (fd behavior)
@@ -32,6 +32,15 @@ pub fn walk_files(file_pattern: Option<&Regex>, no_ignore: bool) -> Vec<PathBuf>
 
     for entry in builder.build() {
         let Ok(entry) = entry else { continue };
+        // Skip anything inside .git directory unless explicitly included
+        if !include_git_dir
+            && entry
+                .path()
+                .components()
+                .any(|c| c.as_os_str() == ".git")
+        {
+            continue;
+        }
         if !entry.file_type().map_or(false, |ft| ft.is_file()) {
             continue;
         }

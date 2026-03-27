@@ -5,7 +5,7 @@ edition = "2021"
 description = "A super-fast search-and-replace tool for files"
 
 [dependencies]
-clap = { version = "4", features = ["derive"] }
+clap = { version = "4", features = ["derive", "env"] }
 regex = "1"
 ignore = "0.4"
 rayon = "1"
