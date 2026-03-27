@@ -47,4 +47,4 @@ Backreferences work with both `\1` and `$1` syntax.
 
 ## License
 
-MIT
+[Apache-2.0](./LICENSE.md)
