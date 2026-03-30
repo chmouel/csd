@@ -3,6 +3,12 @@ name = "csd"
 version = "0.1.0"
 edition = "2021"
 description = "A super-fast search-and-replace tool for files"
+license = "Apache-2.0"
+repository = "https://github.com/chmouel/csd"
+homepage = "https://github.com/chmouel/csd"
+readme = "README.md"
+keywords = ["search", "replace", "regex", "cli"]
+categories = ["command-line-utilities", "text-processing"]
 
 [dependencies]
 clap = { version = "4", features = ["derive", "env"] }
