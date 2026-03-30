@@ -25,6 +25,8 @@ jobs:
             aarch64-apple-darwin
 
       - uses: mlugg/setup-zig@v1
+        with:
+          version: "0.14.1"
 
       - uses: goreleaser/goreleaser-action@v7
         with:
