@@ -24,7 +24,7 @@ jobs:
             x86_64-apple-darwin,
             aarch64-apple-darwin
 
-      - uses: mlugg/setup-zig@v1
+      - uses: mlugg/setup-zig@v2
         with:
           version: "0.14.1"
 
