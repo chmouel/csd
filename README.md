@@ -1,6 +1,6 @@
-# csd
+# csd - Code Search & Diff
 
-Fast search-and-replace across files using regex. Walks directories in parallel, respects `.gitignore`, and shows diffs interactively.
+Fast, safe, interactive search-and-replace across your codebase.
 
 ## Install
 
